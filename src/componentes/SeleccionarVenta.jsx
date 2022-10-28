@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Estio para el contenedor de SeleccionarVenta
@@ -16,6 +16,12 @@ function SeleccionarVenta({ ventas, campo, modificarTabla }) {
   const valoresUnicos = [...new Set(valores)].sort();
 
   const [check, setCheck] = useState(false);
+
+  useEffect(() => {
+    if (!check) {
+      modificarTabla(undefined);
+    }
+  }, [check]);
 
   const onModificarTabla = (e) => {
     if (check) {
